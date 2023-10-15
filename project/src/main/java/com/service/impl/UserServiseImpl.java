@@ -1,3 +1,4 @@
+package com.service.impl;
 import lombok.AllArgsConstructor;
 import net.javaguides.springboot.entity.User;
 import net.javaguides.springboot.repository.UserRepository;
@@ -15,23 +16,18 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-
+//create user
     @Override
     public User createUser(User user) {
         return userRepository.save(user);
     }
-
+//get user
     @Override
-    public User getUserById(Long userId) {
+    public User getUserById(int userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
         return optionalUser.get();
     }
-
-    @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
+//update user
     @Override
     public User updateUser(User user) {
         User existingUser = userRepository.findById(user.getId()).get();
@@ -44,9 +40,9 @@ public class UserServiceImpl implements UserService {
         User updatedUser = userRepository.save(existingUser);
         return updatedUser;
     }
-
+//delete user
     @Override
-    public void deleteUser(Long userId) {
+    public void deleteUser(int userId) {
         userRepository.deleteById(userId);
     }
 }
